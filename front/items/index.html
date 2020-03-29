@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <title>
+    POS
+    </title>
+</head>
+<body>
+    <h1>商品マスター</h1>
+    <table>
+        <thead>
+            <th>ID</th><th>名前</th><th>バーコード</th>
+        </thead>
+        <tbody id="rows"></tbody>
+    </table>
+    <script>
+        window.onload = function(){
+            let tbody = document.getElementById("rows")
+            var req = new Request("/api/items",{
+                method: "GET",
+                dataType : "json",
+            });
+            fetch(req).then(response=>{
+                return response.json();
+            })
+            .then(function(items) {
+                
+                items.forEach(item=>{
+                    let tr = document.createElement('tr')
+                    let td1 = document.createElement("td")
+                    td1.innerHTML = item.id
+                    let td2 = document.createElement("td")
+                    td2.innerHTML = item.name
+                    let td3 = document.createElement("td")
+                    td3.innerHTML = item.barcode
+                    tr.appendChild(td1)
+                    tr.appendChild(td2)
+                    tr.appendChild(td3)
+                    tbody.appendChild(tr)
+                })
+            })
+            
+        }
+    </script>
+</body>
+</html>
