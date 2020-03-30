@@ -46,5 +46,5 @@ func main() {
 	http.Handle("/", http.FileServer(http.Dir("front")))
 
 	http.HandleFunc("/api/items", ItemsRead)
-	http.ListenAndServe(":8080", nil)
+	http.ListenAndServe(":8082", nil)
 }
